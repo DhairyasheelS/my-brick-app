@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Brick Info</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    .card h1 { margin-bottom: 10px; }
+    .card p { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div class="card" id="brickInfo">
+    Loading...
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    fetch("/data/bricks.json")
+      .then(res => res.json())
+      .then(data => {
+        const brick = data[id];
+        const card = document.getElementById("brickInfo");
+        if (brick) {
+          card.innerHTML = `
+            <h1>Brick ID: ${id}</h1>
+            <p><strong>Type:</strong> ${brick.type}</p>
+            <p><strong>Ingredients:</strong> ${brick.ingredients}</p>
+            <p><strong>Price:</strong> ${brick.price}</p>
+          `;
+        } else {
+          card.innerHTML = `<p>No data found for Brick ID: ${id}</p>`;
+        }
+      });
+  </script>
+</body>
+</html>

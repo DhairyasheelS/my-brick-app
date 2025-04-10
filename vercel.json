@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/brick/:id",
+        "destination": "/brick.html?id=:id"
+      }
+    ]
+  }
+  
