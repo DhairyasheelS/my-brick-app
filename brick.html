@@ -31,7 +31,7 @@
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
-    fetch("public/data/bricks.json")
+    fetch("/data/bricks.json")
       .then(res => res.json())
       .then(data => {
         const brick = data[id];
