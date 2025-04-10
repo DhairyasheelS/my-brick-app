@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Brick Details</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -12,35 +16,53 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f2f2f2;
+      font-family: 'Rubik', sans-serif;
+      background: url('https://images.unsplash.com/photo-1610228001770-c476b7c9f1e5?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 2rem;
+      position: relative;
+    }
+
+    /* Overlay for dim effect */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 0;
     }
 
     .card {
       background: #fff3e0;
-      color: #5d4037;
+      color: #4e342e;
       padding: 2rem;
       border-radius: 25px;
-      box-shadow: 10px 10px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
       max-width: 400px;
       width: 100%;
       text-align: center;
-      animation: fadeIn 0.5s ease-in-out;
+      animation: fadeIn 0.6s ease-in-out;
+      z-index: 1;
+      position: relative;
     }
 
-    h1 {
+    .card h1 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
     }
 
-    p {
+    .card p {
       font-size: 1rem;
       margin: 8px 0;
+    }
+
+    .card img {
+      width: 60px;
+      margin-bottom: 1rem;
     }
 
     .spinner {
@@ -53,12 +75,22 @@
       margin: 50px auto;
     }
 
+    footer {
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      color: #ddd;
+      font-size: 0.9rem;
+      width: 100%;
+      z-index: 1;
+    }
+
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
@@ -69,6 +101,10 @@
     <div class="spinner"></div>
     <p>Loading brick information...</p>
   </div>
+
+  <footer>
+    🔗 Powered by My Brick App
+  </footer>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -82,6 +118,7 @@
 
         if (brick) {
           card.innerHTML = `
+            <img src="https://cdn-icons-png.flaticon.com/512/2800/2800485.png" alt="Brick Icon" />
             <h1>🧱 Brick ID: ${id}</h1>
             <p><strong>Type:</strong> ${brick.type}</p>
             <p><strong>Ingredients:</strong> ${brick.ingredients}</p>
@@ -96,5 +133,6 @@
         console.error(err);
       });
   </script>
+
 </body>
 </html>
