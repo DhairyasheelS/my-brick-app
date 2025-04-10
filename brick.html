@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Brick Details</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <title>Material Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       font-family: 'Rubik', sans-serif;
-      background: url('alex-jiang-FOIZq1EMAp4-unsplash.jpg') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1610228001770-c476b7c9f1e5?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
       background-size: cover;
       min-height: 100vh;
       display: flex;
@@ -28,8 +18,6 @@
       position: relative;
     }
 
-
-    /* Overlay for dim effect */
     body::before {
       content: "";
       position: absolute;
@@ -44,27 +32,25 @@
       padding: 2rem;
       border-radius: 25px;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      max-width: 400px;
+      max-width: 450px;
       width: 100%;
-      text-align: center;
-      animation: fadeIn 0.6s ease-in-out;
       z-index: 1;
       position: relative;
+      animation: fadeIn 0.6s ease-in-out;
     }
 
     .card h1 {
-      font-size: 1.8rem;
+      text-align: center;
       margin-bottom: 1rem;
     }
 
-    .card p {
-      font-size: 1rem;
-      margin: 8px 0;
+    .card ul {
+      list-style: none;
+      padding-left: 0;
     }
 
-    .card img {
-      width: 60px;
-      margin-bottom: 1rem;
+    .card li {
+      margin: 0.5rem 0;
     }
 
     .spinner {
@@ -77,75 +63,49 @@
       margin: 50px auto;
     }
 
-    footer {
-      position: absolute;
-      bottom: 10px;
-      text-align: center;
-      color: #ddd;
-      font-size: 0.9rem;
-      width: 100%;
-      z-index: 1;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
-
 <body>
-
-  <div class="card" id="brickInfo">
+  <div class="card" id="materialCard">
     <div class="spinner"></div>
-    <p>Loading brick information...</p>
+    <p style="text-align:center;">Loading material information...</p>
   </div>
-
-  <footer>
-    🔗 Powered by Aditya Patil
-  </footer>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
+    const type = params.get("type");
 
-    fetch("/data/bricks.json")
+    fetch("/data/construction_materials.json")
       .then(res => res.json())
       .then(data => {
-        const brick = data[id];
-        const card = document.getElementById("brickInfo");
+        const material = data[type];
+        const card = document.getElementById("materialCard");
 
-        if (brick) {
+        if (material) {
+          const details = Object.entries(material)
+            .map(([key, value]) => `<li><strong>${key.replace(/_/g, ' ')}:</strong> ${value}</li>`)
+            .join("");
+
           card.innerHTML = `
-            <img src="https://cdn-icons-png.flaticon.com/512/2800/2800485.png" alt="Brick Icon" />
-            <h1>🧱 Brick ID: ${id}</h1>
-            <p><strong>Type:</strong> ${brick.type}</p>
-            <p><strong>Ingredients:</strong> ${brick.ingredients}</p>
-            <p><strong>Price:</strong> ${brick.price}</p>
+            <h1>🔎 ${type.replace(/_/g, " ").toUpperCase()}</h1>
+            <ul>${details}</ul>
           `;
         } else {
-          card.innerHTML = `<h1>Not Found</h1><p>No data for Brick ID: ${id}</p>`;
+          card.innerHTML = `<h1>Not Found</h1><p>No data found for type: ${type}</p>`;
         }
       })
       .catch(err => {
-        document.getElementById("brickInfo").innerHTML = `<p>Error loading data</p>`;
+        document.getElementById("materialCard").innerHTML = `<p>Error loading material data</p>`;
         console.error(err);
       });
   </script>
-
 </body>
-
 </html>

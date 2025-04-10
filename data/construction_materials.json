@@ -1,0 +1,46 @@
+{
+  "brick": {
+    "dimensions": "190x90x90 mm",
+    "manufacturer": "XYZ Bricks",
+    "manufacturing_date": "01/04/2025",
+    "weight": "3.5 kg",
+    "type": "Clay Brick",
+    "price": "₹12 per piece"
+  },
+  "cement": {
+    "type": "Ordinary Portland Cement",
+    "grade": "43",
+    "strength": "53 N/mm²",
+    "setting_time": "30 minutes",
+    "manufacturer": "XYZ Cements",
+    "price": "₹600 per bag",
+    "manufacturing_date": "01/04/2025"
+  },
+  "wood": {
+    "type": "Soft wood (Pine)",
+    "density": "400 kg/m³",
+    "moisture_content": "12%",
+    "price": "₹600 per cubic foot"
+  },
+  "glass": {
+    "type": "Float glass",
+    "thickness": "2–25 mm",
+    "quality_standard": "IS 14900-2018",
+    "price": "₹95 per sq. foot"
+  },
+  "pvc_pipe": {
+    "diameter": "2.5 inch",
+    "weight": "5 kg/sqcm",
+    "length": "6 m",
+    "working_pressure": "4 kg/sqcm",
+    "shape": "Round",
+    "material": "PVC",
+    "price": "₹360 per piece"
+  },
+  "steel_rods": {
+    "type": "Mild steel",
+    "diameter": "16 mm",
+    "weight": "1.58 kg/m",
+    "price": "₹65 per kg"
+  }
+}
