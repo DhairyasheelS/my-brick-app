@@ -1,30 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Brick Info</title>
+  <meta charset="UTF-8">
+  <title>Brick Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: sans-serif;
-      background: #f4f4f4;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
-    }
-    .card {
-      background: white;
+      justify-content: center;
       padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.1);
-      max-width: 400px;
     }
-    .card h1 { margin-bottom: 10px; }
-    .card p { margin: 5px 0; }
+
+    .card {
+      background: #fff3e0;
+      color: #5d4037;
+      padding: 2rem;
+      border-radius: 25px;
+      box-shadow: 10px 10px 30px rgba(0,0,0,0.15);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin: 8px 0;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #8d6e63;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 50px auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
+
   <div class="card" id="brickInfo">
-    Loading...
+    <div class="spinner"></div>
+    <p>Loading brick information...</p>
   </div>
 
   <script>
@@ -36,16 +79,21 @@
       .then(data => {
         const brick = data[id];
         const card = document.getElementById("brickInfo");
+
         if (brick) {
           card.innerHTML = `
-            <h1>Brick ID: ${id}</h1>
+            <h1>🧱 Brick ID: ${id}</h1>
             <p><strong>Type:</strong> ${brick.type}</p>
             <p><strong>Ingredients:</strong> ${brick.ingredients}</p>
-            <p><strong>Price:</strong> ${brick.price}</p>
+            <p><strong>Price:</strong> ₹${brick.price}</p>
           `;
         } else {
-          card.innerHTML = `<p>No data found for Brick ID: ${id}</p>`;
+          card.innerHTML = `<h1>Not Found</h1><p>No data for Brick ID: ${id}</p>`;
         }
+      })
+      .catch(err => {
+        document.getElementById("brickInfo").innerHTML = `<p>Error loading data</p>`;
+        console.error(err);
       });
   </script>
 </body>
