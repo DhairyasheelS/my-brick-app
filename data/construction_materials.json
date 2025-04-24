@@ -29,7 +29,7 @@
     "price": "₹95 per sq. foot"
   },
   "pvc_pipe": {
-    "diameter": "2.5 inch",
+    "diameter": "1 inch",
     "weight": "5 kg/sqcm",
     "length": "6 m",
     "working_pressure": "4 kg/sqcm",
@@ -37,8 +37,8 @@
     "material": "PVC",
     "price": "₹360 per piece"
   },
-  "steel_rods": {
-    "type": "Mild steel",
+  "iron_rods": {
+    "type": "Iron",
     "diameter": "16 mm",
     "weight": "1.58 kg/m",
     "price": "₹65 per kg"
